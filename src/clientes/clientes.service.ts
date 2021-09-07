@@ -5,6 +5,9 @@ export class ClientesService {
   getHello(): string {
     const cliente = new Cliente();
 
-    return 'dusse muebles modulo cliente!' + JSON.stringify(cliente);
+    return 'dusse muebles modulo Cliente!' + JSON.stringify(cliente);
+  }
+  getuno(id: string) {
+    return `devolver ${id}`;
   }
 }

@@ -1,12 +1,13 @@
+import { MuebleCatalogo } from './muebleCatalogo';
+
 export class Mueble {
   numeroSerie: string;
-  mueble: string;
-  modelo: string;
   detalle: {
     descripcion: string;
     madera: string[];
     tapiz: [];
   };
+  muebleCatalogo: MuebleCatalogo;
   contrato: {
     numeroContrato: number;
     valorVenta: number;
@@ -19,4 +20,5 @@ export class Mueble {
     fechaOrden: Date;
     fechaEntrega: Date;
   };
+  imagenesUrls: string[];
 }

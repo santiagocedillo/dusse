@@ -5,6 +5,7 @@ export class Cliente {
   direccion: string;
   email: string[];
   vip = false;
+  imagenUrl: string;
   constructor() {
     this.cedula = '0704254085';
     this.nombre = 'Lina Garza';
