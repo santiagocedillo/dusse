@@ -17,16 +17,18 @@ export class ClientesService {
   getHello(): string {
     return 'dusse muebles modulo Cliente!';
   }
+  async deleteCliente(cedulaBorrar: string): Promise<any> {
+    this.logger.log(`se borrarar ${cedulaBorrar}`);
+    const a = await this.clienteModel
+      .findOneAndDelete({ cedula: cedulaBorrar })
+      .exec();
+    this.logger.debug(a);
+    return a;
+    //return this.clienteModel.findByIdAndDelete({ cedula: cedulaBorrar }).exec();
+  }
   //encuentra un cliente por cedula
   async getuno(cedulaBuscar: string): Promise<Cliente> {
-    const a = await this.clienteModel
-      .findOne({ cedula: cedulaBuscar })
-      .exec()
-      .then();
-    this.logger.debug(`valor a bucar ${cedulaBuscar}`);
-    this.logger.debug(`valor encontrado ${a}`);
-    return a;
-    //this.clienteModel.findOne({ cedula: cedulaBuscar }).exec();
+    return this.clienteModel.findOne({ cedula: cedulaBuscar }).exec();
   }
   //inserta cliente
   async nuevoClienteService(aCrear: ClienteDto): Promise<Cliente> {
@@ -43,6 +45,8 @@ export class ClientesService {
   }
   // encuentra todos los clientes
   async findAll(): Promise<Cliente[]> {
-    return this.clienteModel.find().exec();
+    const lista = await this.clienteModel.find().exec();
+    this.logger.debug(lista);
+    return lista;
   }
 }

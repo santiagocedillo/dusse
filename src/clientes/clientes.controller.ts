@@ -1,11 +1,23 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Logger,
+  Param,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { ClienteDto } from 'src/dto/cliente';
 import { Cliente } from 'src/exquemas/cliente.schema';
 import { ClientesService } from './clientes.service';
 @Controller('clientes')
 export class ClientesController {
-  constructor(private readonly clientesService: ClientesService) {}
-  @Get()
+  logger: Logger;
+  constructor(private readonly clientesService: ClientesService) {
+    this.logger = new Logger();
+  }
+  @Get('todos')
   getHello(): string {
     return this.clientesService.getHello();
   }
@@ -14,14 +26,22 @@ export class ClientesController {
   async getuno(@Param('cedula') cedula: string): Promise<Cliente> {
     return this.clientesService.getuno(cedula);
   }
+  @Delete('/borrar/:cedula')
+  async deleteCliente(@Param('cedula') cedulaBorrar: string, @Res() res) {
+    const retorno = await this.clientesService.deleteCliente(cedulaBorrar);
+    !retorno
+      ? res.status('404').send({ error: 'no encontrado' })
+      : res.status('200').send(retorno);
+  }
   //ruta para crear un nuevo cliente
   @Post('/nuevo')
   async postNuevoCliente(@Body() nuevoCliente: ClienteDto): Promise<any> {
     return this.clientesService.nuevoClienteService(nuevoCliente);
   }
   //ruta para consultar todos los clientes
-  @Get('todos')
+  @Get()
   async findAll(): Promise<Cliente[]> {
+    this.logger.debug(`controlador todos`);
     return this.clientesService.findAll();
   }
 }
