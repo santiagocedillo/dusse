@@ -3,10 +3,11 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
-import { ConnectDb } from './db/mongodb';
+//import { ConnectDb } from './db/mongodb';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   //coneccion a mongoose
+  /*
   try {
     const db = {
       dbName: process.env.DB_NAME,
@@ -17,7 +18,7 @@ async function bootstrap() {
     await ConnectDb(db);
   } catch (e) {
     console.log(`error= ${e}`);
-  }
+  }*/
   //autodocumentacion con SwaggerModule
   const config = new DocumentBuilder()
     .setTitle('DUSSÊ api')

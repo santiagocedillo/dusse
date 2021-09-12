@@ -1,8 +1,8 @@
-import { Cliente } from './cliente';
+import { ClienteDto } from './cliente';
 import { Mueble } from './mueble';
 
 export class Contrato {
-  cliente: Cliente;
+  cliente: ClienteDto;
   detalle: Mueble[];
   subValor: number;
   descuento: number;
