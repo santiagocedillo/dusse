@@ -44,4 +44,11 @@ export class ClientesController {
     this.logger.debug(`controlador todos`);
     return this.clientesService.findAll();
   }
+  @Get('/validar/:cedulaAValidar')
+  async validarCedula(
+    @Param('cedulaAValidar') cedulaAValidar: string,
+  ): Promise<string> {
+    this.logger.debug(`a validar ${cedulaAValidar}`);
+    return this.clientesService.validateCedula(cedulaAValidar);
+  }
 }

@@ -6,12 +6,12 @@ export class ClienteDto {
   email: string[];
   vip = false;
   imagenUrl: string;
-  /*constructor() {
-    this.cedula = '0704254085';
-    this.nombre = 'Lina Garza';
-    this.telefono = ['0997022866', '0997892838'];
-    this.direccion = 'osmara de leon';
-    this.email = ['barbieanges@hotmail.com', 'linadelosangeles@gmail.com'];
-    this.vip = true;
-  }*/
+  constructor({ cedula, nombre, telefono, direccion, email, vip = true }) {
+    this.cedula = cedula;
+    this.nombre = nombre;
+    this.telefono = telefono;
+    this.direccion = direccion;
+    this.email = email;
+    this.vip = vip;
+  }
 }

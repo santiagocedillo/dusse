@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ClienteDto } from '../dto/cliente';
+import { ValidarCedula } from './validaciones/validacionCedula';
 
 import { Cliente, ClienteDocument } from '../exquemas/cliente.schema';
 @Injectable()
@@ -48,5 +49,10 @@ export class ClientesService {
     const lista = await this.clienteModel.find().exec();
     this.logger.debug(lista);
     return lista;
+  }
+  async validateCedula(cedulaAValidar: string): Promise<string> {
+    const valida = ValidarCedula(cedulaAValidar);
+    if (valida) return '{ok}';
+    else return '{error formato}';
   }
 }
