@@ -1,5 +1,3 @@
-import { Logger } from '@nestjs/common';
-
 function modulo(cedula, factor, mod) {
   let digitoComparar = 9;
   if (cedula[2] == 6) {

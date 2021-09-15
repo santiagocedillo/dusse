@@ -6,6 +6,8 @@ import {
   Logger,
   Param,
   Post,
+  Put,
+  Query,
   Res,
 } from '@nestjs/common';
 import { ClienteDto } from 'src/dto/cliente';
@@ -33,6 +35,13 @@ export class ClientesController {
       ? res.status('404').send({ error: 'no encontrado' })
       : res.status('200').send(retorno);
   }
+  @Delete('/borrar')
+  async deleteId(@Query('id') idBorrar: string, @Res() res) {
+    const retorno = await this.clientesService.deleteId(idBorrar);
+    !retorno
+      ? res.status('404').send({ error: 'no encontrado' })
+      : res.status('200').send(retorno);
+  }
   //ruta para crear un nuevo cliente
   @Post('/nuevo')
   async postNuevoCliente(@Body() nuevoCliente: ClienteDto): Promise<any> {
@@ -50,5 +59,12 @@ export class ClientesController {
   ): Promise<string> {
     this.logger.debug(`a validar ${cedulaAValidar}`);
     return this.clientesService.validateCedula(cedulaAValidar);
+  }
+  // update cliente
+  @Put('/actualizar/')
+  async actualizarCliente(@Body() nuevosDatos: ClienteDto): Promise<Cliente> {
+    this.logger.debug(`nuevos datos ${nuevosDatos}`);
+    const a = await this.clientesService.actualizarCliente(nuevosDatos);
+    return a;
   }
 }

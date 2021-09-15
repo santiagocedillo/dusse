@@ -19,13 +19,19 @@ export class ClientesService {
     return 'dusse muebles modulo Cliente!';
   }
   async deleteCliente(cedulaBorrar: string): Promise<any> {
-    this.logger.log(`se borrarar ${cedulaBorrar}`);
+    this.logger.log(`se borrarar cedula ${cedulaBorrar}`);
     const a = await this.clienteModel
       .findOneAndDelete({ cedula: cedulaBorrar })
       .exec();
     this.logger.debug(a);
     return a;
-    //return this.clienteModel.findByIdAndDelete({ cedula: cedulaBorrar }).exec();
+  }
+  async deleteId(idBorrar: string): Promise<any> {
+    this.logger.log(`se borrarar id ${idBorrar}`);
+
+    const a = await this.clienteModel.findByIdAndDelete(idBorrar).exec();
+    this.logger.debug(JSON.stringify(a));
+    return a;
   }
   //encuentra un cliente por cedula
   async getuno(cedulaBuscar: string): Promise<Cliente> {
@@ -54,5 +60,11 @@ export class ClientesService {
     const valida = ValidarCedula(cedulaAValidar);
     if (valida) return '{ok}';
     else return '{error formato}';
+  }
+  async actualizarCliente(nuevosDatos: ClienteDto): Promise<Cliente> {
+    const respuersta = await this.clienteModel.findById(nuevosDatos._id);
+    this.logger.debug(JSON.stringify(respuersta));
+    this.logger.debug(JSON.stringify(nuevosDatos));
+    return this.clienteModel.replaceOne({ _id: nuevosDatos._id }, nuevosDatos);
   }
 }

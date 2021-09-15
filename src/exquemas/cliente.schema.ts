@@ -13,8 +13,8 @@ export class Cliente {
   direccion: string;
   @Prop({ trim: true })
   email: string[];
-  @Prop({ default: false, type: Boolean })
-  vip = Boolean;
+  @Prop({ default: false })
+  vip: boolean;
   @Prop({ trim: true })
   imagenUrl: string;
 }
