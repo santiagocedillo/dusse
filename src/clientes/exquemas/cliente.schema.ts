@@ -5,11 +5,11 @@ export type ClienteDocument = Cliente & Document;
 export class Cliente {
   @Prop({ required: true, trim: true })
   cedula: string;
-  @Prop({ trim: true })
+  @Prop({ trim: true, uppercase: true })
   nombre: string;
   @Prop({ trim: true })
   telefono: string[];
-  @Prop({ trim: true })
+  @Prop({ trim: true, uppercase: true })
   direccion: string;
   @Prop({ trim: true })
   email: string[];

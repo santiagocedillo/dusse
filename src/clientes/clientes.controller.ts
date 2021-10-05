@@ -10,8 +10,8 @@ import {
   Query,
   Res,
 } from '@nestjs/common';
-import { ClienteDto } from 'src/dto/cliente';
-import { Cliente } from 'src/exquemas/cliente.schema';
+import { ClienteDto } from 'src/clientes/dto/cliente';
+import { Cliente } from 'src/clientes/exquemas/cliente.schema';
 import { ClientesService } from './clientes.service';
 @Controller('clientes')
 export class ClientesController {

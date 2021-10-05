@@ -1,13 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ClienteDto } from '../dto/cliente';
+import { ClienteDto } from './dto/cliente';
 import { ValidarCedula } from './validaciones/validacionCedula';
 
-import { Cliente, ClienteDocument } from '../exquemas/cliente.schema';
+import { Cliente, ClienteDocument } from './exquemas/cliente.schema';
 @Injectable()
 export class ClientesService {
-  [x: string]: any;
   logger: Logger;
   constructor(
     @InjectModel(Cliente.name) private clienteModel: Model<ClienteDocument>,
@@ -62,7 +61,7 @@ export class ClientesService {
     else return '{error formato}';
   }
   async actualizarCliente(nuevosDatos: ClienteDto): Promise<Cliente> {
-    const respuersta = await this.clienteModel.findById(nuevosDatos._id);
+    const respuersta = this.clienteModel.findById(nuevosDatos._id);
     this.logger.debug(JSON.stringify(respuersta));
     this.logger.debug(JSON.stringify(nuevosDatos));
     return this.clienteModel.replaceOne({ _id: nuevosDatos._id }, nuevosDatos);
